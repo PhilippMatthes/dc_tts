@@ -47,7 +47,7 @@ def record(sequence, identifier):
         if input("Save this sample? ctrl+c to retry"):
             pass
     except KeyboardInterrupt:
-        record(sequence, identifier)
+        return record(sequence, identifier)
 
     wf = wave.open("LJSpeech-1.1/wavs/{}.wav".format(identifier), 'wb')
     wf.setnchannels(CHANNELS)
@@ -59,12 +59,15 @@ def record(sequence, identifier):
     os.system('clear')
 
 
+SECTION = "LJ003"
+
+
 with open("LJSpeech-1.1/metadata.csv", "r") as f:
     for row in f.readlines():
         splitted_row = row.split("|")
         sequence = splitted_row[2]
         identifier = splitted_row[0]
-        if identifier in existing_identifiers:
+        if identifier in existing_identifiers or not identifier.startswith(SECTION):
             continue
 
         print(sequence)
