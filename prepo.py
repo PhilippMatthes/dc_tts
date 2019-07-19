@@ -13,6 +13,29 @@ from data_load import load_data
 import numpy as np
 import tqdm
 
+import wave
+import time
+import os
+
+import pygame
+
+from os import listdir
+from os.path import isfile, join
+
+existing_samples = [f for f in listdir("LJSpeech-1.1/wavs") if isfile(join("LJSpeech-1.1/wavs", f))]
+existing_identifiers = [sample.replace(".wav", "") for sample in existing_samples]
+print("{} existing samples found. Preloading transcript...".format(len(existing_samples)))
+
+with open("LJSpeech-1.1/metadata_all.csv", "r") as all_metadata_file:
+    with open("LJSpeech-1.1/transcript.csv", "w") as transcript_file:
+        for row in all_metadata_file.readlines():
+            splitted_row = row.split("|")
+            identifier = splitted_row[0]
+            if identifier in existing_identifiers:
+                transcript_file.write(row)
+
+print("Done with preloading transcript.")
+
 # Load data
 fpaths, _, _ = load_data() # list
 
