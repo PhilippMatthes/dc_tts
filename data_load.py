@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #/usr/bin/python2
 '''
-By kyubyong park. kbpark.linguist@gmail.com. 
+By kyubyong park. kbpark.linguist@gmail.com.
 https://www.github.com/kyubyong/dc_tts
 '''
 
@@ -104,8 +104,8 @@ def get_batch():
         if hp.prepro:
             def _load_spectrograms(fpath):
                 fname = os.path.basename(fpath)
-                mel = "mels/{}".format(fname.replace("wav", "npy"))
-                mag = "mags/{}".format(fname.replace("wav", "npy"))
+                mel = "mels/{}".format(fname.decode("utf-8").replace("wav", "npy"))
+                mag = "mags/{}".format(fname.decode("utf-8").replace("wav", "npy"))
                 return fname, np.load(mel), np.load(mag)
 
             fname, mel, mag = tf.py_func(_load_spectrograms, [fpath], [tf.string, tf.float32, tf.float32])
@@ -129,4 +129,3 @@ def get_batch():
                                             dynamic_pad=True)
 
     return texts, mels, mags, fnames, num_batch
-

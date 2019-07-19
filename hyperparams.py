@@ -1,14 +1,15 @@
+import os
 # -*- coding: utf-8 -*-
 #/usr/bin/python2
 '''
-By kyubyong park. kbpark.linguist@gmail.com. 
+By kyubyong park. kbpark.linguist@gmail.com.
 https://www.github.com/kyubyong/dc_tts
 '''
 class Hyperparams:
     '''Hyper parameters'''
     # pipeline
     prepro = True  # if True, run `python prepro.py` first before running `python train.py`.
-    
+
     # signal processing
     sr = 22050  # Sampling rate.
     n_fft = 2048  # fft points (samples)
@@ -32,7 +33,7 @@ class Hyperparams:
     attention_win_size = 3
 
     # data
-    data = "/data/private/voice/LJSpeech-1.0"
+    data = os.path.join(os.path.dirname(os.path.realpath(__file__)), "LJSpeech-1.1")
     # data = "/data/private/voice/kate"
     test_data = 'harvard_sentences.txt'
     vocab = "PE abcdefghijklmnopqrstuvwxyz'.?" # P: Padding, E: EOS.
