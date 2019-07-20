@@ -12,7 +12,7 @@ existing_identifiers = [sample.replace(".wav", "") for sample in existing_sample
 print("{} existing samples found.".format(len(existing_samples)))
 
 
-with open("LJSpeech-1.1/metadata.csv", "r") as f:
+with open("LJSpeech-1.1/metadata_all.csv", "r") as f:
     for row in f.readlines():
         splitted_row = row.split("|")
         sequence = splitted_row[2]
